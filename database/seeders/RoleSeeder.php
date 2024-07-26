@@ -21,7 +21,7 @@ class RoleSeeder extends Seeder
             'edit-user',
             'delete-user',
         ]);
-        
+
 
     }
 }

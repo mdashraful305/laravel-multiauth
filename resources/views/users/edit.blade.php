@@ -8,7 +8,7 @@
     <div class="section-header">
       <h1>Manage User</h1>
       <div class="section-header-breadcrumb">
-        <div class="breadcrumb-item active"><a href="{{ route('home') }}">Dashboard</a></div>
+        <div class="breadcrumb-item active"><a href="{{ route('dashboard') }}">Dashboard</a></div>
         <div class="breadcrumb-item">users</div>
       </div>
     </div>
@@ -106,11 +106,6 @@
 
 @endsection
 @push('scripts')
-    <script src="{{ asset('backend/assets/modules/select2/dist/js/select2.full.min.js') }}"></script>
-    <script>
-        $(document).ready(function() {
-            $('.select2').select2();
-        });
-    </script>
+  
 
 @endpush

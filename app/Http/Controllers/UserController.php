@@ -16,18 +16,6 @@ use App\Http\Requests\UpdateUserRequest;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-
-     public function __construct()
-    {
-        $this->middleware('auth');
-        $this->middleware('permission:create-user|edit-user|delete-user', ['only' => ['index','show']]);
-        $this->middleware('permission:create-user', ['only' => ['create','store']]);
-        $this->middleware('permission:edit-user', ['only' => ['edit','update']]);
-        $this->middleware('permission:delete-user', ['only' => ['destroy']]);
-    }
 
     /**
      * Display a listing of the resource.
@@ -114,7 +102,7 @@ class UserController extends Controller
         return redirect()->route('users.index')
                 ->withSuccess('User is updated successfully.');
         }else{
-            return redirect()->route('profile')
+            return redirect()->route('users.profile')
                 ->withSuccess('Profile is updated successfully.');
         }
     }

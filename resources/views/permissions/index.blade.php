@@ -5,7 +5,7 @@
     <div class="section-header">
       <h1>Manage Permissions</h1>
       <div class="section-header-breadcrumb">
-        <div class="breadcrumb-item active"><a href="{{ route('home') }}">Dashboard</a></div>
+        <div class="breadcrumb-item active"><a href="{{ route('dashboard') }}">Dashboard</a></div>
         <div class="breadcrumb-item">Permissions</div>
       </div>
     </div>
@@ -18,7 +18,7 @@
             <div class="card-header">
               <h4></h4>
               <div class="card-header-form">
-                @can('create-user')
+                @can('create-permission')
                     <a href="{{ route('permissions.create') }}" class="btn btn-success btn-sm my-2"><i class="bi bi-plus-circle"></i> Add New Permissions</a>
                 @endcan
               </div>
@@ -43,7 +43,7 @@
                                     <a href="{{ route('permissions.edit', $permission->id) }}" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i> Edit</a>
                                 @endcan
 
-                                @can('delete-permission')
+                                @can('destroy-permission')
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to delete this role?');"><i class="bi bi-trash"></i> Delete</button>
 
                                 @endcan

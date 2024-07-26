@@ -5,19 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Http\RedirectResponse;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
 class PermissionController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->middleware('permission:create-permission|edit-permission|delete-permission', ['only' => ['index','show']]);
-        $this->middleware('permission:create-permission', ['only' => ['create','store']]);
-        $this->middleware('permission:edit-permission', ['only' => ['edit','update']]);
-        $this->middleware('permission:delete-permission', ['only' => ['destroy']]);
-    }
 
     public function index(): View
     {
@@ -29,7 +22,8 @@ class PermissionController extends Controller
     public function create(): View
     {
         return view('permissions.create', [
-            'permissions' => Permission::get()
+            'routes' => Route::getRoutes()->getRoutes(),
+            'permissions' => Permission::orderBy('id','DESC')->pluck('name')->toArray()
         ]);
     }
 

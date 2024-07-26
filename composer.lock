@@ -30,6 +30,9 @@
             },
             "type": "library",
             "autoload": {
+                "files": [
+                    "app/Http/Helpers.php"
+                ],
                 "psr-4": {
                     "Brick\\Math\\": "src/"
                 }

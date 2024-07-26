@@ -8,7 +8,7 @@
     <div class="section-header">
       <h1>Manage Permmissions</h1>
       <div class="section-header-breadcrumb">
-        <div class="breadcrumb-item active"><a href="{{ route('home') }}">Dashboard</a></div>
+        <div class="breadcrumb-item active"><a href="{{ route('dashboard') }}">Dashboard</a></div>
         <div class="breadcrumb-item">Permmissions</div>
       </div>
     </div>
@@ -29,11 +29,15 @@
                             <div class="mb-3 row">
                                 <label for="name" class="col-md-4 col-form-label text-md-end text-start">Name</label>
                                 <div class="col-md-6">
-                                  <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" placeholder="create-permission">
-                                    @if ($errors->has('name'))
-                                        <span class="text-danger">{{ $errors->first('name') }}</span>
-                                    @endif
+                                    <select class="form-control" name="name" id="name">
+                                        @foreach ($routes as $route)
+                                            @if ($route->getName() != '' && $route->getAction()['middleware']['0'] == 'web' && !in_array(routeName($route->getName()),$permissions))
+                                                <option value="">{{ routeName($route->getName()) }}</option>
+                                            @endif
+                                        @endforeach
+                                      </select>
                                 </div>
+
                             </div>
 
                             <div class="mb-3 row">
@@ -49,11 +53,6 @@
 </section>
 @endsection
 @push('scripts')
-    <script src="{{ asset('backend/assets/modules/select2/dist/js/select2.full.min.js') }}"></script>
-    <script>
-        $(document).ready(function() {
-            $('.select2').select2();
-        });
-    </script>
+
 
 @endpush

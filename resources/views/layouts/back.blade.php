@@ -68,6 +68,32 @@
         swal("Error!", "{{ session('error') }}", "error");
     @endif
   </script>
+   <script src="{{ asset('backend/assets/modules/select2/dist/js/select2.full.min.js') }}"></script>
+   <script>
+       $(document).ready(function() {
+           const addSelectAll = matches => {
+               if (matches.length > 0) {
+               // Insert a special "Select all matches" item at the start of the
+               // list of matched items.
+               return [
+                   {id: 'selectAll', text: 'Select all matches', matchIds: matches.map(match => match.id)},
+                   ...matches
+               ];
+               }
+           };
+           const handleSelection = event => {
+               if (event.params.data.id === 'selectAll') {
+               $('.select2').val(event.params.data.matchIds);
+               $('.select2').trigger('change');
+               };
+           };
+           $('.select2').select2({
+               multiple: true,
+               sorter: addSelectAll,
+           });
+           $('.select2').on('select2:select', handleSelection);
+       });
+   </script>
   @stack('scripts')
 </body>
 </html>
